@@ -92,12 +92,12 @@ body{
 .and-sym{display:block;font-family:'Cormorant Garamond';font-style:italic;font-size:26px;color:var(--gold);margin:6px 0}
 .hero-date{font-family:'Cormorant Garamond';font-size:19px;letter-spacing:1px;color:var(--ivory-dim)}
 .scroll-cue{
-  margin-top:40px;display:flex;flex-direction:column;align-items:center;gap:8px;
-  color:var(--gold-light);font-size:10px;letter-spacing:3px;
-  animation:bob 2.2s ease-in-out infinite;
+  margin-top:40px;display:flex;flex-direction:column;align-items:center;gap:10px;
+  color:var(--gold-light);font-size:14px;letter-spacing:3px;font-weight:600;
+  animation:bob 1.6s ease-in-out infinite;
 }
 @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(8px)}}
-.scroll-cue svg{width:16px;height:16px}
+.scroll-cue svg{width:30px;height:30px;stroke-width:2.2}
 
 /* ---------- headings/body ---------- */
 .title{font-family:'Cormorant Garamond';font-style:italic;font-weight:500;font-size:clamp(34px,7vw,46px);color:var(--gold-light);margin:8px 0}
@@ -146,9 +146,57 @@ body{
   .count-grid{gap:14px}
   .card{padding:28px 18px 24px}
 }
+
+/* ---------- mobile-first scroll transitions ---------- */
+.reveal.rl{transform:translateX(-70px)}
+.reveal.rr{transform:translateX(70px)}
+.reveal.rz{transform:scale(.86)}
+.reveal.rl.in,.reveal.rr.in,.reveal.rz.in{transform:none}
+.progress{position:fixed;left:0;top:env(safe-area-inset-top,0px);height:3px;width:0;z-index:50;
+  background:linear-gradient(90deg,var(--gold-dim),var(--gold-light));box-shadow:0 0 10px #eecf8f88}
+.event{position:relative;overflow:hidden}
+.event{padding:0}
+.event-inner{width:100%;max-width:420px;padding:30px 20px 34px;border-radius:14px;position:relative;
+  background:radial-gradient(circle at 50% 0%,#8a2232 0%,#5a0f1b 55%,#3f0a13 100%);
+  border:1px solid #c9973f66;box-shadow:0 24px 60px #00000060,inset 0 0 40px #c9973f14}
+.event-inner:before{content:"";position:absolute;inset:7px;border:1px dashed #c9973f55;border-radius:10px;pointer-events:none}
+.ev-icon{width:74px;height:74px;margin:-62px auto 10px;display:block;filter:drop-shadow(0 0 14px #eecf8f88)}
+.ev-icon .spin{transform-origin:50% 50%;animation:spin 18s linear infinite}
+.ev-icon .tw{animation:tw 2.4s ease-in-out infinite}.ev-icon .tw.b{animation-delay:.8s}.ev-icon .tw.c{animation-delay:1.5s}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes tw{0%,100%{opacity:.25}50%{opacity:1}}
+.ev-time{font-family:'Cormorant Garamond';font-weight:600;font-size:clamp(52px,17vw,68px);line-height:1;margin:6px 0 2px;
+  background:linear-gradient(100deg,#c9973f 20%,#fff2cf 45%,#c9973f 70%);background-size:220% 100%;
+  -webkit-background-clip:text;background-clip:text;color:transparent;animation:shine 3.6s ease-in-out infinite}
+@keyframes shine{0%{background-position:120% 0}100%{background-position:-120% 0}}
+.ev-date{display:inline-flex;gap:10px;align-items:center;margin:12px 0 4px;padding:8px 18px;border-radius:40px;
+  border:1px solid #c9973f77;font-family:'Cormorant Garamond';font-size:19px;color:var(--ivory)}
+.ev-date b{color:var(--gold-light);font-weight:600}
+.ev-note{font-family:'Cormorant Garamond';font-style:italic;font-size:17px;color:var(--ivory-dim);margin-top:8px}
+.event .btn{width:100%;justify-content:center;padding:15px 20px;font-size:13px;margin-top:22px}
+.event.glow .event-inner{animation:glow 4s ease-in-out infinite}
+@keyframes glow{0%,100%{box-shadow:0 24px 60px #00000060,0 0 0 #c9973f00}50%{box-shadow:0 24px 60px #00000060,0 0 34px #c9973f44}}
+.section.event-sec{padding-top:110px}
+
+/* ---------- countdown (mobile-first) ---------- */
+.count-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;width:100%;max-width:400px;margin:24px 0 12px}
+.count-box{position:relative;padding:18px 0 12px;border-radius:14px;overflow:hidden;
+  background:linear-gradient(165deg,#7a1b28,#43091380);border:1px solid #c9973f66;
+  box-shadow:0 10px 24px #00000045,inset 0 0 18px #c9973f14}
+.count-box:before{content:"";position:absolute;left:0;right:0;top:50%;height:1px;background:#00000040}
+.count-box .num{font-size:clamp(30px,10.5vw,44px);font-weight:600;font-variant-numeric:tabular-nums;
+  background:linear-gradient(180deg,#fff2cf,#c9973f);-webkit-background-clip:text;background-clip:text;color:transparent}
+.count-box .lbl{font-size:10px;letter-spacing:1.8px;color:var(--gold-light);margin-top:8px}
+.count-box .num.pop{animation:pop .45s ease-out}
+@keyframes pop{0%{transform:translateY(-10px) scale(.9);opacity:.3}100%{transform:none;opacity:1}}
+.count-box.live{border-color:#eecf8f99;animation:livepulse 1s ease-in-out infinite}
+@keyframes livepulse{0%,100%{box-shadow:0 10px 24px #00000045,0 0 0 #eecf8f00}50%{box-shadow:0 10px 24px #00000045,0 0 16px #eecf8f55}}
+.count-when{font-family:'Cormorant Garamond';font-style:italic;font-size:18px;color:var(--ivory-dim);margin-top:4px}
+@media(max-width:380px){.count-grid{gap:7px}.count-box .lbl{font-size:9px;letter-spacing:1.2px}}
 </style>
 </head>
 <body>
+<div class="progress" id="prog"></div>
 <div class="mandala-bg"></div>
 <div class="mandala-ring" id="ring"></div>
 
@@ -183,7 +231,7 @@ body{
   <div class="divider reveal in d3"><span class="line"></span><span class="mark">✦</span><span class="line"></span></div>
   <div class="hero-date reveal in d3">Thursday · 3rd December 2026</div>
   <div class="scroll-cue reveal in d4">
-    <span>Scroll to open</span>
+    <span>SCROLL DOWN TO OPEN</span>
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 4v16M6 14l6 6 6-6"/></svg>
   </div>
 </section>
@@ -201,25 +249,29 @@ body{
 </section>
 
 <!-- MUHURTHAM -->
-<section class="section">
+<section class="section event-sec">
   <div class="reveal eyebrow">The wedding ceremony</div>
-  <div class="title reveal">Muhurtham</div>
-  <div class="card reveal d1">
+  <div class="title reveal d1">Muhurtham</div>
+  <div class="event-inner event glow reveal rl d2">
+    <svg class="ev-icon" viewBox="0 0 80 80" fill="none" stroke="#eecf8f" stroke-width="2" stroke-linecap="round"><g class="spin"><path d="M40 4v10M40 66v10M4 40h10M66 40h10M14.5 14.5l7 7M58.5 58.5l7 7M14.5 65.5l7-7M58.5 21.5l7-7"/></g><circle cx="40" cy="40" r="15" fill="#d9701f" stroke="#eecf8f"/></svg>
     <div class="small-note">Ceremony begins</div>
-    <div class="time">11:00 AM</div>
-    <div class="serif" style="font-size:17px">Thursday, 3rd December 2026</div>
+    <div class="ev-time">11:00 AM</div>
+    <div class="ev-date"><b>THU</b> 3rd December 2026</div>
+    <div class="ev-note">Please join us with your blessings</div>
     <button class="btn" onclick="calendarFile('Wedding Ceremony','2026-12-03T11:00:00','2026-12-03T14:00:00')">+ Add to calendar</button>
   </div>
 </section>
 
 <!-- RECEPTION -->
-<section class="section">
+<section class="section event-sec">
   <div class="reveal eyebrow">The evening celebration</div>
-  <div class="title reveal">Reception</div>
-  <div class="card reveal d1">
+  <div class="title reveal d1">Reception</div>
+  <div class="event-inner event glow reveal rr d2">
+    <svg class="ev-icon" viewBox="0 0 80 80" fill="none" stroke="#eecf8f" stroke-width="2" stroke-linecap="round"><path d="M50 12a28 28 0 1 0 18 42A24 24 0 0 1 50 12z" fill="#d9701f"/><g fill="#eecf8f" stroke="none"><circle class="tw" cx="16" cy="18" r="2.2"/><circle class="tw b" cx="66" cy="20" r="1.8"/><circle class="tw c" cx="60" cy="66" r="2"/></g></svg>
     <div class="small-note">Join us from</div>
-    <div class="time">7:00 PM</div>
-    <div class="serif" style="font-size:17px">Thursday, 3rd December 2026</div>
+    <div class="ev-time">7:00 PM</div>
+    <div class="ev-date"><b>THU</b> 3rd December 2026</div>
+    <div class="ev-note">An evening of joy, music &amp; dinner</div>
     <button class="btn" onclick="calendarFile('Reception','2026-12-03T19:00:00','2026-12-03T22:00:00')">+ Add to calendar</button>
   </div>
 </section>
@@ -247,12 +299,13 @@ body{
 <section class="section">
   <div class="reveal eyebrow">Until we celebrate</div>
   <div class="title reveal">See you soon</div>
-  <div class="count-grid reveal d1">
+  <div class="count-grid reveal rz d1">
     <div class="count-box"><div class="num" id="d">0</div><div class="lbl">Days</div></div>
     <div class="count-box"><div class="num" id="h">0</div><div class="lbl">Hours</div></div>
     <div class="count-box"><div class="num" id="m">0</div><div class="lbl">Min</div></div>
-    <div class="count-box"><div class="num" id="s">0</div><div class="lbl">Sec</div></div>
+    <div class="count-box live"><div class="num" id="s">0</div><div class="lbl">Sec</div></div>
   </div>
+  <div class="count-when reveal d2">Thursday, 3rd December 2026 · 11:00 AM</div>
   <div class="divider reveal d2"><span class="line"></span><span class="mark">✦</span><span class="line"></span></div>
   <div class="om reveal d3">ॐ</div>
 </section>
@@ -269,12 +322,14 @@ const io=new IntersectionObserver((entries)=>{
 document.querySelectorAll('.reveal:not(.in)').forEach(el=>io.observe(el));
 
 /* slow rotating mandala tied to scroll for a subtle sense of motion */
+const prog=document.getElementById('prog');
 const ring=document.getElementById('ring');
 let ticking=false;
 window.addEventListener('scroll',()=>{
   if(!ticking){
     requestAnimationFrame(()=>{
       ring.style.transform=`rotate(${window.scrollY*0.045}deg)`;
+      prog.style.width=(window.scrollY/Math.max(1,document.documentElement.scrollHeight-innerHeight)*100)+'%';
       ticking=false;
     });
     ticking=true;
@@ -293,9 +348,44 @@ function tick(){
   d.textContent=Math.floor(x/86400000);
   h.textContent=String(Math.floor(x/3600000)%24).padStart(2,'0');
   m.textContent=String(Math.floor(x/60000)%60).padStart(2,'0');
-  s.textContent=String(Math.floor(x/1000)%60).padStart(2,'0');
+  const sv=String(Math.floor(x/1000)%60).padStart(2,'0');
+  if(s.textContent!==sv){s.textContent=sv;s.classList.remove('pop');void s.offsetWidth;s.classList.add('pop');}
 }
 tick();setInterval(tick,1000);
+
+/* peek-scroll: gently nudge the page down and back so people know it scrolls */
+(function(){
+  if(window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  let stopped=false,busy=false,count=0;
+  const stop=()=>{stopped=true};
+  ['wheel','touchstart','mousedown','keydown'].forEach(e=>window.addEventListener(e,stop,{passive:true,once:true}));
+  const ease=x=>x<.5?2*x*x:1-Math.pow(-2*x+2,2)/2;
+  function move(from,to,ms){
+    return new Promise(res=>{
+      const t0=performance.now();
+      (function step(now){
+        if(stopped) return res();
+        const k=Math.min(1,(now-t0)/ms);
+        window.scrollTo({top:from+(to-from)*ease(k),behavior:'instant'});
+        k<1?requestAnimationFrame(step):res();
+      })(t0);
+    });
+  }
+  async function peek(){
+    if(stopped||busy||window.scrollY>5) return;
+    busy=true;
+    const dist=Math.min(140,window.innerHeight*0.2);
+    await move(0,dist,1000);
+    await new Promise(r=>setTimeout(r,350));
+    if(!stopped) await move(dist,0,1000);
+    busy=false;
+  }
+  function loop(){
+    if(stopped||count>=8) return;
+    count++;peek().then(()=>setTimeout(loop,3200));
+  }
+  setTimeout(loop,1500);
+})();
 </script>
 </body>
 </html>
