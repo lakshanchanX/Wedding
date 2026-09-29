@@ -258,7 +258,6 @@ body{
     <div class="ev-time">11:00 AM</div>
     <div class="ev-date"><b>THU</b> 3rd December 2026</div>
     <div class="ev-note">Please join us with your blessings</div>
-    <button class="btn" onclick="calendarFile('Wedding Ceremony','2026-12-03T11:00:00','2026-12-03T14:00:00')">+ Add to calendar</button>
   </div>
 </section>
 
@@ -272,7 +271,6 @@ body{
     <div class="ev-time">7:00 PM</div>
     <div class="ev-date"><b>THU</b> 3rd December 2026</div>
     <div class="ev-note">An evening of joy, music &amp; dinner</div>
-    <button class="btn" onclick="calendarFile('Reception','2026-12-03T19:00:00','2026-12-03T22:00:00')">+ Add to calendar</button>
   </div>
 </section>
 
@@ -335,12 +333,6 @@ window.addEventListener('scroll',()=>{
     ticking=true;
   }
 },{passive:true});
-
-function calendarFile(title,start,end){
-  const fmt=x=>x.replaceAll('-','').replaceAll(':','');
-  const ics=`BEGIN:VCALENDAR\\r\\nVERSION:2.0\\r\\nBEGIN:VEVENT\\r\\nDTSTART;TZID=Asia/Kolkata:${fmt(start)}\\r\\nDTEND;TZID=Asia/Kolkata:${fmt(end)}\\r\\nSUMMARY:${title} - Rakshitha & Mayur\\r\\nLOCATION:Ruby Banquet Hall, Sandor, Chulne, Vasai (West), Palghar, Maharashtra 401201\\r\\nEND:VEVENT\\r\\nEND:VCALENDAR`;
-  const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([ics],{type:'text/calendar'}));a.download=title.toLowerCase().replace(/\\s+/g,'-')+'.ics';a.click();
-}
 
 const wedding=new Date('2026-12-03T11:00:00+05:30').getTime();
 function tick(){
